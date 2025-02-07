@@ -1,10 +1,31 @@
-import { h, createApp } from './node_modules/vue/dist/vue.esm-browser.prod.js';
+import { h, createApp } from '/node_modules/vue/dist/vue.esm-browser.prod.js';
+import Input from '/components/input.js';
 
 const Login = {
     data() {
         return {
-            username: 'alex',
-            password: 'sarah'
+            username: 'Antony',
+            password: 'motDePasseSuperSécurisé',
+            inputs: [
+                {
+                    identifier: 'username',
+                    autocompleteType: 'username',
+                    type: 'text',
+                    label: 'Username',
+                    placeholder: 'Enter your username',
+                    onInput: (value) => this.username = value,
+                    required: true
+                },
+                {
+                    identifier: 'password',
+                    autocompleteType: 'current-password',
+                    type: 'password',
+                    label: 'Password',
+                    placeholder: 'Enter your password',
+                    onInput: (value) => this.password = value,
+                    required: true
+                }
+            ]
         };
     },
     render() {
@@ -17,10 +38,11 @@ const Login = {
         return h('main', h('form',
             //attributs (fonctions on[...], type d'input etc)
             {
+                class: 'translate-y-[-25%]',
                 onSubmit: (e) => {
                     e.preventDefault();
 
-                    alert('Login attempt:' + " " + this.username + " " + this.password);
+                    alert(`Username: ${this.username}\nPassword: ${this.password}`);
                 }
             },
             //enfants de la balise (comme en React enft)
@@ -32,42 +54,12 @@ const Login = {
                         h('legend', {
                             class: 'text-xl font-semibold px-2'
                         }, 'Login'),
-                        h('article', [
-                            h('label', {
-                                class: 'text-md font-medium',
-                                for: 'username'
-                            }, 'Username: '),
-                            h('input', {
-                                id: 'username',
-                                name: 'username',
-                                autocomplete: 'username',
-                                type: 'text',
-                                class: 'border border-input bg-transparent px-3 py-1 text-base shadow-sm rounded-md w-full',
-                                placeholder: "Entre ton Nom chacal",
-                                value: this.username,
-                                required: true,
-                                onInput: (e) => this.username = e.target.value
-                            })
-                        ]),
-                        h('article', [
-                            h('label', {
-                                class: 'text-md font-medium',
-                                for: 'password'
-                            }, 'Password: '),
-                            h('input', {
-                                id: 'password',
-                                name: 'password',
-                                autocomplete: 'current-password',
-                                class: 'border border-input bg-transparent px-3 py-1 text-base shadow-sm rounded-md w-full',
-                                type: 'password',
-                                placeholder: "Mot de passe",
-                                value: this.password,
-                                required: true,
-                                onInput: (e) => this.password = e.target.value
-                            })
-                        ]),
+                        ...this.inputs.map(args => h(Input, {
+                            defaultValue: this[args.identifier], // on ajoute a la main car c'est innaccessible dans data()
+                            ...args
+                        })),
                         h('button', {
-                            class: 'rounded-md text-md font-medium bg-gray-50 text-gray-950 hover:bg-gray-50/70 py-2 w-full mt-4',
+                            class: 'rounded-md text-md font-medium bg-gray-50 text-gray-950 hover:bg-gray-50/70 px-4 py-2 w-full mt-4',
                             type: 'submit',
                         }, 'Login')
                     ])
