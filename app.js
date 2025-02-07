@@ -17,6 +17,7 @@ const Login = {
         return h('main', h('form',
             //attributs (fonctions on[...], type d'input etc)
             {
+                class: 'translate-y-[-25%]',
                 onSubmit: (e) => {
                     e.preventDefault();
 
