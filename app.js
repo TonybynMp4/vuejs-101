@@ -25,29 +25,47 @@ const Login = {
         },
         //enfants de la balise (comme en React enft)
         [
-            h('fieldset', [
-            h('legend', 'Login'),
-            h('div', [
-                h('label', 'Username: '),
-                h('input', {
-                    type: 'text',
-                    placeholder: "Entre ton Nom chacal",
-                    value: this.username,
-                    onInput: (e) => this.username = e.target.value
-                })
-            ]),
-            h('div', [
-                h('label', 'Password: '),
-                h('input', {
-                    type: 'password',
-                    placeholder: "Mot de passe",
-                    value: this.password,
-                    onInput: (e) => this.password = e.target.value
-                })
-            ]),
-            h('button', {
-                type: 'submit',
-            }, 'Login')
+            h('fieldset', {
+                class: 'flex items-center justify-center flex-col p-4 gap-4 rounded-xl border bg-neutral-950 text-card-foreground shadow'
+            },
+                [
+                h('legend', {
+                    class: 'text-xl font-semibold px-2'
+                }, 'Login'),
+                h('div', [
+                    h('label', {
+                        class: 'text-md font-medium',
+                        for: 'username'
+                    }, 'Username: '),
+                    h('input', {
+                        type: 'text',
+                        class: 'border border-input bg-transparent px-3 py-1 text-base shadow-sm rounded-md w-full',
+                        id: 'username',
+                        placeholder: "Entre ton Nom chacal",
+                        value: this.username,
+                        required: true,
+                        onInput: (e) => this.username = e.target.value
+                    })
+                ]),
+                h('div', [
+                    h('label', {
+                        class: 'text-md font-medium',
+                        for: 'password'
+                    }, 'Password: '),
+                    h('input', {
+                        class: 'border border-input bg-transparent px-3 py-1 text-base shadow-sm rounded-md w-full',
+                        type: 'password',
+                        id: 'password',
+                        placeholder: "Mot de passe",
+                        value: this.password,
+                        required: true,
+                        onInput: (e) => this.password = e.target.value
+                    })
+                ]),
+                h('button', {
+                    class: 'rounded-md text-sm font-medium bg-gray-50 text-gray-950 hover:bg-gray-50/70 h-9 px-4 py-2 w-full mt-4',
+                    type: 'submit',
+                }, 'Login')
             ])
         ])
     }

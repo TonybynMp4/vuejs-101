@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: ui-sans-serif,system-ui,sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(0 0% 3.9%);
+    color: white;
+}
+
+.border {
+    border-color: rgb(42, 42, 45);
+}
